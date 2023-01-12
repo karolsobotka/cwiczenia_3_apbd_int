@@ -54,10 +54,10 @@ namespace Cw3.Controllers
 
         }
         [HttpPut("{indexNumber}")]
-        public IActionResult updateStudent(string indexNumber)
+        public IActionResult updateStudent([FromBody] Student student)
         {
-            _fileDbService.UpdateStudent(indexNumber);
-            return Ok($"Student o numerze indeksu {indexNumber} zaktualizowany");
+            _fileDbService.UpdateStudent(student);
+            return Ok($"Student o numerze indeksu {student.IndexNumber} zaktualizowany");
         }
     }
 }

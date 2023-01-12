@@ -11,7 +11,7 @@ namespace Cw3.Services
         IEnumerable<Student> GetStudents();
         Student GetStudent(string indexNumber);
         void AddStudent(Student student);
-        void UpdateStudent(string indexNumber);
+        void UpdateStudent(Student student);
         void DeleteStudent(string indexNumber);
        
     }

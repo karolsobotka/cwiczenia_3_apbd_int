@@ -69,21 +69,35 @@ namespace Cw3.Services
                 }
                
             }
+
+            stream.Close();
             
             
         }
        
         private Student student;
 
-        public void AddStudent(Student student)
+        public void AddStudent(Student st)
         {
-            if (student == null)
+            if (st == null)
             {
                 throw new ArgumentNullException();
             }
             else
             {
-                
+                studentsList.Add(new Student
+                {
+                    IndexNumber = st.IndexNumber,
+                    FirstName = st.FirstName,
+                    LastName = st.LastName,
+                    dateOfBirth = st.dateOfBirth,
+                    studies = new WebApplication1.Studies(st.studies.studiesMode, st.studies.studiesName),
+                    email = st.email,
+                    fathersName = st.fathersName,
+                    mothersName = st.mothersName
+                });
+
+                writeToFileFromList();
             }
            
         }
@@ -115,9 +129,33 @@ namespace Cw3.Services
             return studentsList;
         }
 
-        public void UpdateStudent(string indexNumber)
+        public void UpdateStudent(Student st)
         {
-            throw new NotImplementedException();
+            student = studentsList.Find(e => e.IndexNumber == st.IndexNumber);
+            
+
+
+            if (student != null)
+            {
+
+                student.IndexNumber = st.IndexNumber;
+                student.FirstName = st.FirstName;
+                student.LastName = st.LastName;
+                student.dateOfBirth = st.dateOfBirth;
+                student.studies = new WebApplication1.Studies(st.studies.studiesMode, st.studies.studiesName);
+                student.email = st.email;
+                student.fathersName = st.fathersName;
+                student.mothersName = st.mothersName;
+
+            }
+            else
+            {
+                throw new Exception("Nie ma takiego studenta do zaktualizowania");
+            }
+            writeToFileFromList();
+
+           
+
         }
     }
 }
